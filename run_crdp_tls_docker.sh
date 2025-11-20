@@ -9,4 +9,5 @@ docker run -d -e KEY_MANAGER_HOST=192.168.0.230 -e REGISTRATION_TOKEN=U3Sca0xJYr
   thalesciphertrust/ciphertrust-restful-data-protection
 
 #
-#docker run -e KEY_MANAGER_HOST=<IP address or host name> -e REGISTRATION_TOKEN=<registration token> -p <host port>:<CRDP_port> -e SERVER_MODE=tls-cert-opt -e CERT_VALUE="<certificate value>" -e KEY_VALUE="<key value>" <crdp image name>
+#docker run -e KEY_MANAGER_HOST=<IP address or host name> -e REGISTRATION_TOKEN=<registration token> -p <host port>:<CRDP_port> \
+#-e SERVER_MODE=tls-cert-opt -e CERT_VALUE="<certificate value>" -e KEY_VALUE="<key value>" <crdp image name>
