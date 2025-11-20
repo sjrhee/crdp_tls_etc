@@ -100,14 +100,9 @@ kubectl get secret crdp-tls-tls
 ## ✅ 검증
 
 ```bash
-# HTTPS 테스트 (포트 32382)
-for i in {1..10}; do
-  curl -s -k https://localhost:32382/health -o /dev/null && echo "✓" || echo "✗"
-done
-
-# HTTP healthz 테스트 (포트 32380)
+# HTTPS 테스트 (포트 32380)
 for i in {1..100}; do
-  curl -s http://localhost:32380/healthz -o /dev/null 2>&1 && echo -n "." || echo -n "F"
+  curl -s -k https://localhost:32382/healthz -o /dev/null && echo "✓" || echo "✗"
 done
 echo ""
 ```
