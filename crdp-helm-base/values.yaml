@@ -1,0 +1,22 @@
+label: crdp-nosec
+
+deployment:
+
+  name: crdp-deployment
+  crdpContainername: crdp-container
+  crdpimage: thalesciphertrust/ciphertrust-restful-data-protection:latest
+  replicas: 2
+ 
+env:
+  serverMode: no-tls
+  kms: 192.168.0.230 # IP address or hostname of CipherTrust Manager 
+  regToken: du7f2vlioiDa8hF979LUJssvCydhojN5K40hJoTqiepuV5CWp9wcwIUSuWWLmTta
+
+service:
+  name: crdp-service
+  type: NodePort
+  nodePort: 32082 # This value can be any number between 30000-32767
+  port: 8090
+  probesPort: 8080
+  nodePortForProbes: 32080 # This value can be any number between 30000-32767
+

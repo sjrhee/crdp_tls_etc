@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{.Values.label}}
+  name: {{.Values.deployment.name}} 
+spec:
+  template:
+     metadata:
+        labels:
+          app: {{.Values.label}}
+     spec:     
+      containers:
+        - image: {{.Values.deployment.crdpimage}}
+          imagePullPolicy: IfNotPresent
+          name: {{.Values.deployment.crdpContainername}}
+          
+          env:
+            - name: KEY_MANAGER_HOST
+              value: {{.Values.env.kms}}
+            - name: SERVER_MODE
+              value: {{.Values.env.serverMode}}      
+            - name: REGISTRATION_TOKEN
+              value: {{.Values.env.regToken}}
+            - name: CERT_VALUE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ printf "%s-tls" .Release.Name }}
+                  key: server.crt
+            - name: KEY_VALUE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ printf "%s-tls" .Release.Name }}
+                  key: server.key      
+
+  replicas: {{.Values.deployment.replicas}}
+  selector:
+      matchLabels:
+        app: {{.Values.label}}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels: 
+    app: {{.Values.label}}
+  name: {{.Values.service.name}}
+spec:
+  selector:
+    app: {{.Values.label}}
+  type: {{.Values.service.type}}
+  ports:
+    - name: service-port
+      port: {{.Values.service.port}}
+      nodePort: {{.Values.service.nodePort}}
+    - name: probes-port
+      port: {{.Values.service.probesPort}}
+      nodePort: {{.Values.service.nodePortForProbes}}
+---
+
