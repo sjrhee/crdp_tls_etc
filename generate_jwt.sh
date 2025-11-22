@@ -2,16 +2,15 @@
 set -euo pipefail
 
 # 사용법:
-#   ./generate_jwt.sh <iss> <sub> [private_key_file] [kid]
+#   ./generate_jwt.sh <iss> <sub> [private_key_file]
 #
 # 예:
-#   ./generate_jwt.sh "https://id.example.com" "alice"
-#   ./generate_jwt.sh "https://id.example.com" "alice" jwt_signing_key.pem my-key-id-1
+#   ./generate_jwt.sh "jwt-issuer" "username"
+#   ./generate_jwt.sh "jwt-issuer" "username" jwt_signing_key.pem
 
-ISS="${1:-https://192.168.0.233:32182}"
-SUB="${2:-user01}"
+ISS="${1:-jwt-issuer}"
+SUB="${2:-username}"
 PRIVATE_KEY="${3:-jwt_signing_key.pem}"
-KID="${4:-}"
 
 # Base64URL 인코딩 함수
 b64url() {
@@ -20,15 +19,14 @@ b64url() {
 }
 
 # 1) Header 생성
-if [ -n "$KID" ]; then
-  HEADER='{"alg":"RS256","typ":"JWT","kid":"'"$KID"'"}'
-else
-  HEADER='{"alg":"RS256","typ":"JWT"}'
-fi
+HEADER='{"alg":"RS256","typ":"JWT"}'
 
 # 2) Payload 생성 (iat/exp 포함)
 NOW=$(date +%s)           # 현재 시각 (UNIX epoch)
-EXP=$((NOW + 3600))       # 1시간 후 (3600초 후)
+# EXP 설정: 아래를 수정하여 만료 일자 지정
+# 예: EXP=$(date -d "2025-12-31" +%s)  # 특정 날짜
+# 예: EXP=$(date -d "+30 days" +%s)    # 30일 후
+EXP=$(date -d "+1 day" +%s)             # 기본값: 1일 후
 
 PAYLOAD='{"iss":"'"$ISS"'","sub":"'"$SUB"'","iat":'"$NOW"',"exp":'"$EXP"'}'
 
