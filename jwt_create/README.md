@@ -8,7 +8,7 @@
   - JWT 서명에 사용할 공개키/개인키 쌍을 생성하는 스크립트입니다.
   - `config.yaml`의 설정을 따릅니다.
 
-- **`create_jwt.py`**
+- **`generate_jwt.py`**
   - Python을 사용하여 JWT 토큰을 생성하는 스크립트입니다.
   - `config.yaml`의 설정을 사용하여 토큰을 생성하고 `keys/` 폴더에 저장합니다.
 
