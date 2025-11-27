@@ -89,7 +89,7 @@ docker logs <container_id>
 | 환경 변수 | 설명 | 필수 여부 |
 |----------|------|----------|
 | `KEY_MANAGER_HOST` | CipherTrust Manager의 IP 주소 또는 호스트명 | 필수 |
-| `REGISTRATION_TOKEN` | CipherTrust Manager에서 발급받은 등록 토큰 | 필수 |
+| `REGISTRATION_TOKEN` | CipherTrust Manager에서 발급받은 등록 토큰 | 필수(선택) |
 | `SERVER_MODE` | 서버 모드 (`tls-cert-opt`: TLS 인증서 사용) | 필수 |
 | `CERT_VALUE` | 서버 인증서 내용 (cert.pem) | TLS 모드 시 필수 |
 | `KEY_VALUE` | 서버 개인키 내용 (key.pem) | TLS 모드 시 필수 |
