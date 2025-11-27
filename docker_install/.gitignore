@@ -1,0 +1,11 @@
+# PEM 파일들 (민감한 정보)
+keys/*.pem
+keys/*.key
+
+# 임시 파일
+keys/*.csr
+keys/*.cnf
+keys/*.srl
+
+# 백업 폴더
+backup_*/
