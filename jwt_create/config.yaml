@@ -21,4 +21,4 @@ key_dir: ./keys
 key_name_prefix: jwt_key
 
 # 기존 키를 사용할지 여부 (true: 기존 키 사용, false: 새 키 생성)
-use_existing_keys: false
+use_existing_keys: true
